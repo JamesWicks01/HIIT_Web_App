@@ -1,0 +1,15 @@
+{
+  "name": "webprogramming_coursework_2024",
+  "version": "1.0.0",
+  "description": "REMOVE ME: Introduce the key features, paying special attention to the non-code ones.  Tell us briefly how to find & use them, and describes the reasons behind the design decisions you made in their implementation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
