@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timer Progress Bar Example</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #progress-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #f1f1f1;
+      padding: 10px;
+      text-align: center;
+    }
+
+    #progress-bar {
+      width: 0;
+      height: 30px;
+      background-color: #4CAF50;
+      color: white;
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="content">
+    <h1>Your Page Content Goes Here</h1>
+    <!-- Add your page content here -->
+  </div>
+
+  <div id="progress-container">
+    <div id="progress-bar">0s</div>
+  </div>
+
+  <script>
+    function updateProgressBar() {
+      const progressBar = document.getElementById('progress-bar');
+      const totalTime = 100; // Set the total duration in seconds
+
+      let currentTime = 0;
+      const interval = setInterval(() => {
+        currentTime++;
+        progressBar.style.width = (currentTime / totalTime) * 100 + '%';
+        progressBar.innerHTML = currentTime + 's';
+
+        if (currentTime >= totalTime) {
+          clearInterval(interval);
+          progressBar.style.backgroundColor = '#4CAF50'; // Change color to green when complete
+        }
+      }, 1000);
+    }
+
+    // Call the function when the page is fully loaded
+    window.onload = updateProgressBar;
+  </script>
+
+</body>
+</html>

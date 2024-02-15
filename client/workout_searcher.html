@@ -1,12 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="scripts/workout_searcher.js"></script>
-    <title>HIIT Web App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout Sessions</title>
 </head>
 <body>
-    <h1>Workout Searcher</h1>
+
+  <h1>Workout Sessions</h1>
+
+  <form>
+    <label for="searchInput">Search:</label>
+    <input type="text" id="searchInput" oninput="searchWorkouts()" placeholder="Type to search...">
+  </form>
+
+  <table id="workoutTable">
+    <thead>
+      <tr>
+        <th>Workout Name</th>
+        <th>Type</th>
+        <th>Duration</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody id="workoutTableBody">
+      <!-- Workout sessions will be dynamically added here -->
+    </tbody>
+  </table>
+
+  <form id="addWorkoutForm">
+    <label for="workoutName">Workout Name:</label>
+    <input type="text" id="workoutName" required>
+
+    <label for="workoutType">Type:</label>
+    <input type="text" id="workoutType" required>
+
+    <label for="workoutDuration">Duration:</label>
+    <input type="text" id="workoutDuration" required>
+
+    <label for="workoutDescription">Description:</label>
+    <textarea id="workoutDescription" required></textarea>
+
+    <button type="button" onclick="addWorkout()">Add Workout</button>
+  </form>
+
+  <script>
+    // Load workout data from local storage on page load
+    window.onload = function() {
+      loadWorkouts();
+    };
+
+    function addWorkout() {
+      const workoutName = document.getElementById('workoutName').value;
+      const workoutType = document.getElementById('workoutType').value;
+      const workoutDuration = document.getElementById('workoutDuration').value;
+      const workoutDescription = document.getElementById('workoutDescription').value;
+
+      // Create a new table row
+      const newRow = document.createElement('tr');
+
+      // Add cells with workout information
+      newRow.innerHTML = `
+        <td>${workoutName}</td>
+        <td>${workoutType}</td>
+        <td>${workoutDuration}</td>
+        <td>${workoutDescription}</td>
+      `;
+
+      // Append the new row to the table body
+      document.getElementById('workoutTableBody').appendChild(newRow);
+
+      // Save the updated workout data to local storage
+      saveWorkouts();
+
+      // Clear the form inputs
+      document.getElementById('addWorkoutForm').reset();
+    }
+
+    function saveWorkouts() {
+      // Get existing workout data from local storage
+      const existingWorkouts = JSON.parse(localStorage.getItem('workouts')) || [];
+
+      // Create a new workout object
+      const newWorkout = {
+        name: document.getElementById('workoutName').value,
+        type: document.getElementById('workoutType').value,
+        duration: document.getElementById('workoutDuration').value,
+        description: document.getElementById('workoutDescription').value,
+      };
+
+      // Add the new workout to the existing data
+      existingWorkouts.push(newWorkout);
+
+      // Save the updated workout data to local storage
+      localStorage.setItem('workouts', JSON.stringify(existingWorkouts));
+
+      // Refresh the displayed workouts
+      loadWorkouts();
+    }
+
+    function loadWorkouts() {
+      // Get workout data from local storage
+      const savedWorkouts = JSON.parse(localStorage.getItem('workouts')) || [];
+
+      // Display saved workouts in the table
+      const tableBody = document.getElementById('workoutTableBody');
+      tableBody.innerHTML = ''; // Clear existing rows
+
+      savedWorkouts.forEach(workout => {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+          <td>${workout.name}</td>
+          <td>${workout.type}</td>
+          <td>${workout.duration}</td>
+          <td>${workout.description}</td>
+        `;
+        tableBody.appendChild(newRow);
+      });
+    }
+
+    function searchWorkouts() {
+      const searchInput = document.getElementById('searchInput').value.toLowerCase();
+      const tableRows = document.querySelectorAll('#workoutTableBody tr');
+
+      tableRows.forEach(row => {
+        const workoutName = row.querySelector('td:first-child').innerText.toLowerCase();
+        if (workoutName.includes(searchInput)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
 </body>
 </html>
