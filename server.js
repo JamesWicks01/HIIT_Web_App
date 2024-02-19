@@ -1,5 +1,10 @@
 import express from 'express';
 
 const app = express();
-app.use(express.static('client'));
-app.listen(8080);
+const port = 8080;
+
+app.use(express.static('client', {extensions: ['html']}));
+
+app.listen(port, () => {
+    console.log(`Server has started and running on https://127.0.0.1:${port}`);
+});
