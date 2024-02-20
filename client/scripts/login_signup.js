@@ -34,7 +34,7 @@ function signup() {
         };
         localStorage.setItem('UserDetails', JSON.stringify(UserDetails));
         console.log('Stored Data Successfully');
-        // window.location = 'dashboard.html';
+        window.location = 'dashboard.html';
     }
 
 }
@@ -53,7 +53,7 @@ function login() {
         storedUserData.isLoggedIn = 'true';
         localStorage.setItem('UserDetails', JSON.stringify(storedUserData));
         console.log("Login successful");
-        // window.location = 'dashboard.html';
+        window.location = 'dashboard.html';
     } else {
         errorText.textContent = 'Invalid email or password.';
     }

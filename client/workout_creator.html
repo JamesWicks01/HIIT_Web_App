@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    #workout-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .exercise {
+      margin: 10px;
+    }
+  </style>
+  <title>Workout Creator</title>
+</head>
+<body>
+
+<h2>Workout Creator</h2>
+
+<div>
+  <label for="activity-name">Activity Name:</label>
+  <input type="text" id="activity-name">
+  <label for="activity-duration">Duration (seconds):</label>
+  <input type="number" id="activity-duration">
+  <label for="activity-description">Description:</label>
+  <input type="text" id="activity-description">
+  <button onclick="addExercise()">Add Exercise</button>
+</div>
+
+<ul id="workout-list"></ul>
+
+<script>
+  function addExercise() {
+    const exerciseName = document.getElementById('exercise-name').value;
+    const exerciseDuration = document.getElementById('exercise-duration').value;
+
+    if (exerciseName.trim() !== '' && !isNaN(exerciseDuration) && exerciseDuration > 0) {
+      const workoutList = document.getElementById('workout-list');
+
+      const exerciseItem = document.createElement('li');
+      exerciseItem.className = 'exercise';
+      exerciseItem.innerHTML = `<strong>${exerciseName}</strong> - ${exerciseDuration} seconds`;
+
+      workoutList.appendChild(exerciseItem);
+
+      // Clear input fields
+      document.getElementById('exercise-name').value = '';
+      document.getElementById('exercise-duration').value = '';
+    } else {
+      alert('Please enter a valid exercise name and duration.');
+    }
+  }
+</script>
+
+</body>
+</html>
