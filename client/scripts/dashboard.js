@@ -1,9 +1,9 @@
 function LoadCreateWorkout() {
-    window.location = 'workout_creator.html';
+    window.location = 'workout-creator';
 }
 
 function LoadSearchedWorkout() {
-    window.location = 'workout_searcher.html';
+    window.location = 'workout-searcher';
 }
 
 function init() {
