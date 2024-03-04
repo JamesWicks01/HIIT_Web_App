@@ -1,3 +1,4 @@
+
 const express = require('express');
 const path = require('path');
 
@@ -18,6 +19,10 @@ app.get('/workout-creator', (req, res) => {
 
 app.get('/workout-searcher', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'client', 'pages', 'workout_searcher.html'));
+});
+
+app.get('/daily-workout', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'pages', 'daily_workout.html'));
 });
 
 app.get('/run-workout', (req, res) => {
