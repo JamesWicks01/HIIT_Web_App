@@ -20,6 +20,10 @@ app.get('/workout-searcher', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'client', 'pages', 'workout_searcher.html'));
 });
 
+app.get('/run-workout', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'pages', 'run_workout.html'));
+});
+
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });

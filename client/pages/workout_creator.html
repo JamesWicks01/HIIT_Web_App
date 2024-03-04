@@ -3,27 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../scripts/createworkout.js"></script>
   <title>Workout Creator</title>
 </head>
 <body>
 
 <h2>Workout Creator</h2>
 
-<form>
-  <label for="title">Title:</label>
-  <input type="text" id="title">
-  <br>
-  <label for="type">Type:</label>
-  <input type="text" id="type">
-  <br>
-  <label for="intensity">Intensity:</label>
-  <input type="text" id="intensity">
-  <br>
-  <label for="duration">Duration:</label>
-  <input type="text" id="duration">
-  <br>
-  <label for="description">Description:</label>
-  <input type="text" id="description">
+<!-- Add workout form -->
+<form id="addWorkoutForm">
+    <label for="intensity">Intensity: </label>
+    <select id="intensity" name="intensity" required>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select>
+    <br>
+
+    <label for="workoutTitle">Workout Title: </label>
+    <input type="text" id="workoutTitle" name="workoutTitle" required>
+    <br>
+
+    <label for="workoutType">Workout Type: </label>
+    <input type="text" id="workoutType" name="workoutType" required>
+    <br>
+
+    <label for="workoutDuration">Workout Duration: </label>
+    <input type="text" id="workoutDuration" name="workoutDuration" required>
+    <br>
+
+    <label for="workoutDescription">Workout Description: </label>
+    <textarea id="workoutDescription" name="workoutDescription" required></textarea>
+    <br>
+
+    <label for="createdBy">Created By: </label>
+    <input type="text" id="createdBy" name="createdBy" required>
+    <br>
+
+    <label for="makePublic">Make Public: </label>
+    <input type="checkbox" id="makePublic" name="makePublic">
+    <br>
+
+    <button type="button" onclick="createworkout()">Add Workout</button>
 </form>
 
 </body>
