@@ -8,17 +8,18 @@ function loadWorkouts() {
     let workoutContainer = document.getElementById("workoutContainer");
     let newCollapsible = document.createElement("button");
     newCollapsible.classList.add("collapsible");
-    newCollapsible.textContent = workout.workoutTitle;
+    newCollapsible.textContent = workout.title;
 
     let newContent = document.createElement("div");
     newContent.classList.add("content");
     newContent.innerHTML = `
-        <p>Workout Type: ${workout.workoutType}</p>
+        <p>Workout Type: ${workout.type}</p>
         <p>Workout Intensity: ${workout.intensity}</p>
-        <p>Workout Duration: ${workout.workoutDuration}</p>
-        <p>Workout Description: ${workout.workoutDescription}</p>
+        <p>Workout Duration: ${workout.duration}</p>
+        <p>Workout Description: ${workout.description}</p>
         <p>Created By: ${workout.createdBy}</p>
-        <button>Use Workout</button>
+        <p>Included Exercises: ${workout.exercises}</p>
+        <button>START WORKOUT</button>
     `;
 
     // Append the collapsible content
