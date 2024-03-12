@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../scripts/createworkout.js"></script>
+  <link rel="stylesheet" href="../css/workout_creator.css">
+  <title>Workout Creator</title>
+</head>
+<body>
+
+<h2>Workout Creator</h2>
+
+<form id="addWorkoutForm">
+  <label for="intensity">Intensity: </label>
+  <select id="intensity" name="intensity" required>
+    <option value="low">Low</option>
+    <option value="medium">Medium</option>
+    <option value="high">High</option>
+  </select>
+  <br>
+  <label for="workoutTitle">Workout Title: </label>
+  <input type="text" id="workoutTitle" name="workoutTitle" required>
+  <br>
+  <label for="workoutType">Workout Type: </label>
+  <input type="text" id="workoutType" name="workoutType" required>
+  <br>
+  <label for="workoutDuration">Workout Duration: </label>
+  <input type="text" id="workoutDuration" name="workoutDuration" required>
+  <br>
+  <label for="workoutDescription">Workout Description: </label>
+  <textarea id="workoutDescription" name="workoutDescription" required></textarea>
+  <br>
+  <label for="createdBy">Created By: </label>
+  <input type="text" id="createdBy" name="createdBy" required>
+  <br>
+  <!-- Exercise section -->
+  <div id="exerciseSection"></div>
+  <p style="color: red;" id="errorMessage"></p>
+  <button type="button" onclick="addExercise()">Add Exercise</button>
+  <button type="button" onclick="createWorkout()">Add Workout</button>
+</form>
+
+</body>
+</html>
