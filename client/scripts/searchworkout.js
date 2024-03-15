@@ -39,8 +39,14 @@ function loadWorkouts() {
     }
 }
 
+function LoadDashboard() {
+    window.location = "/"
+}
+
 function init(){
     loadWorkouts();
+    const BackButton = document.querySelector("#BackButton");
+    BackButton.addEventListener("click", LoadDashboard);
 }
 
 window.addEventListener('load', init);

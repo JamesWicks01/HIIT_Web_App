@@ -1,0 +1,3 @@
+function LoadDashboard() {
+    window.location = "/"
+}

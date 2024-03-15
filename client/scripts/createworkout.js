@@ -5,6 +5,10 @@
     console.log('Saved Workouts:', savedWorkouts);
   }
 
+  function LoadDashboard() {
+    window.location = "/"
+  }
+
   function addExercise() {
     // Create new input elements for exercise
     let exerciseNameInput = document.createElement("input");
