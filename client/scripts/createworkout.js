@@ -24,7 +24,7 @@
     // Append new inputs to the exercise section
     document.getElementById("exerciseSection").appendChild(document.createTextNode("Exercise Name: "));
     document.getElementById("exerciseSection").appendChild(exerciseNameInput);
-    document.getElementById("exerciseSection").appendChild(document.createTextNode("Exercise Duration: "));
+    document.getElementById("exerciseSection").appendChild(document.createTextNode("Exercise Duration (Seconds): "));
     document.getElementById("exerciseSection").appendChild(exerciseDurationInput);
   }
 
@@ -81,7 +81,7 @@
 
   function clearForm() {
     // Clear the form inputs
-    document.getElementById("intensity").value = "low";
+    document.getElementById("intensity").value = "Low";
     document.getElementById("workoutTitle").value = "";
     document.getElementById("workoutType").value = "";
     document.getElementById("workoutDescription").value = "";
