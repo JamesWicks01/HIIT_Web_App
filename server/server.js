@@ -1,8 +1,18 @@
 const express = require("express");
 const path = require("path");
+const sqlite3 = require("sqlite3");
 
 const app = express();
 const port = 8080;
+
+// Connect to SQLite database
+const db = new sqlite3.Database(path.join(__dirname, "..", "server", "database", "database.sql"), (err) => {
+  if (err) {
+    console.error("Error connecting to database:", err.message);
+  } else {
+    console.log("Connected to the SQLite database.");
+  }
+});
 
 // Serve static files from the 'client' folder
 app.use(express.static(path.join(__dirname, "..", "client")));
