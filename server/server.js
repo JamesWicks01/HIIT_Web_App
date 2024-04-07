@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, "..", "client")));
 
 // Route for the index.html page
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "client", "pages", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "client", "pages", "dashboard.html"));
 });
 
 app.get("/workout-creator", (req, res) => {
