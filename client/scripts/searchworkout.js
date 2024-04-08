@@ -34,6 +34,19 @@ function loadWorkouts() {
 
       newContent.innerHTML += `<button>START WORKOUT</button>`;
 
+      // Set color based on intensity with transparency
+      let intensityColor = "";
+      if (workout.intensity.toLowerCase() === "low") {
+        intensityColor = "rgba(18, 125, 24, 0.5)"; // Green
+      } else if (workout.intensity.toLowerCase() === "medium") {
+        intensityColor = "rgba(255, 165, 0, 0.5)"; // Orange
+      } else if (workout.intensity.toLowerCase() === "high") {
+        intensityColor = "rgba(255, 0, 0, 0.5)"; // Red
+      } else {
+        intensityColor = "rgb(0, 0, 0)"; 
+      }
+      newCollapsible.style.backgroundColor = intensityColor;
+
       // Append the collapsible content
       workoutContainer.appendChild(newCollapsible);
       workoutContainer.appendChild(newContent);
