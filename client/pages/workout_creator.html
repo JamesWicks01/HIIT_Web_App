@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="../scripts/createworkout.js"></script>
+    <script type="module" src="../scripts/createworkout.js"></script>
     <link rel="stylesheet" href="../css/workout_creator.css" />
     <title>Workout Creator</title>
   </head>
@@ -42,10 +42,10 @@
       <!-- Exercise section -->
       <div id="exerciseSection"></div>
       <p style="color: red" id="errorMessage"></p>
-      <button type="button" onclick="addExercise()">Add Exercise</button>
-      <button type="button" onclick="createWorkout()">Add Workout</button>
+      <button type="button" id="AddExerciseButton">Add Exercise</button>
+      <button type="button" id="CreateWorkoutButton">Add Workout</button>
     </form>
     <br />
-    <button id="BackButton" onclick="LoadDashboard()">Back</button>
+    <button id="BackButton">Back</button>
   </body>
 </html>

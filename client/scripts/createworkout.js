@@ -33,6 +33,7 @@ function addExercise() {
 }
 
 function createWorkout() {
+  let id = uuidv4();
   let intensity = document.getElementById("intensity").value;
   let title = document.getElementById("workoutTitle").value;
   let type = document.getElementById("workoutType").value;
@@ -60,6 +61,7 @@ function createWorkout() {
 
   // Save the workout data to local storage
   let workout = {
+    id: id,
     intensity: intensity,
     title: title,
     type: type,
@@ -107,3 +109,14 @@ function clearForm() {
     exerciseSection.removeChild(exerciseSection.firstChild);
   }
 }
+
+function init() {
+  const BackButton = document.getElementById("BackButton");
+  BackButton.addEventListener("click", LoadDashboard);
+  const AddExerciseButton = document.getElementById("AddExerciseButton");
+  AddExerciseButton.addEventListener("click", addExercise);
+  const CreateWorkoutButton = document.getElementById("CreateWorkoutButton");
+  CreateWorkoutButton.addEventListener("click", createWorkout);
+}
+
+window.addEventListener("load", init);
