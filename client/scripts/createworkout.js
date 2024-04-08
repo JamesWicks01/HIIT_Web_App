@@ -38,6 +38,7 @@ function createWorkout() {
   let type = document.getElementById("workoutType").value;
   let description = document.getElementById("workoutDescription").value;
   let createdBy = document.getElementById("createdBy").value;
+  let visibility = document.getElementById("visibility").value;
   let errorText = document.querySelector("#errorMessage");
 
   // Access exercise details
@@ -65,6 +66,7 @@ function createWorkout() {
     duration: duration,
     description: description,
     createdBy: createdBy,
+    visibility: visibility,
     exercises: exercises,
   };
 
@@ -74,7 +76,8 @@ function createWorkout() {
     type === "" ||
     duration === "" ||
     description === "" ||
-    createdBy === ""
+    createdBy === "" ||
+    visibility === ""
   ) {
     errorText.textContent = "Please fill in all fields";
   } else {
