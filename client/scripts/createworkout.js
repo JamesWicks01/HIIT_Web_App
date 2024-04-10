@@ -33,64 +33,50 @@ function addExercise() {
 }
 
 function createWorkout() {
-  let intensity = document.getElementById("intensity").value;
-  let title = document.getElementById("workoutTitle").value;
-  let type = document.getElementById("workoutType").value;
-  let description = document.getElementById("workoutDescription").value;
-  let createdBy = document.getElementById("createdBy").value;
-  let visibility = document.getElementById("visibility").value;
-  let errorText = document.querySelector("#errorMessage");
-
-  // Access exercise details
-  let exerciseNames = document.getElementsByName("exerciseName");
-  let exerciseDurations = document.getElementsByName("exerciseDuration");
-
-  // Process exercise details as needed
-  let exercises = [];
-  let totalDuration = 0; // Initialize total duration
-  for (let i = 0; i < exerciseNames.length; i++) {
-    let name = exerciseNames[i].value;
-    let duration = parseInt(exerciseDurations[i].value); // Parse duration to integer
-    // Add your logic to handle exercise details
-    exercises.push({ name: name, duration: duration });
-    totalDuration += duration; // Add exercise duration to total duration
-  }
-
-  let duration = totalDuration.toString(); // Convert total duration to string
-
-  // Save the workout data to local storage
-  let workout = {
-    intensity: intensity,
-    title: title,
-    type: type,
-    duration: duration,
-    description: description,
-    createdBy: createdBy,
-    visibility: visibility,
-    exercises: exercises,
+  // Collect workout data
+  let workoutData = {
+    intensity: document.getElementById("intensity").value,
+    title: document.getElementById("workoutTitle").value,
+    type: document.getElementById("workoutType").value,
+    description: document.getElementById("workoutDescription").value,
+    createdBy: document.getElementById("createdBy").value,
+    visibility: document.getElementById("visibility").value,
+    exercises: [],
   };
 
-  if (
-    intensity === "" ||
-    title === "" ||
-    type === "" ||
-    duration === "" ||
-    description === "" ||
-    createdBy === "" ||
-    visibility === ""
-  ) {
-    errorText.textContent = "Please fill in all fields";
-  } else {
-    let savedWorkouts = JSON.parse(localStorage.getItem("workouts")) || [];
-    savedWorkouts.push(workout);
-    localStorage.setItem("workouts", JSON.stringify(savedWorkouts));
-
-    // Logs the saved workouts in the console
-    console.log("Saved Workouts:", savedWorkouts);
-
-    // Clears the form after saving
-    clearForm();
+  // Collect exercise data
+  let exerciseNames = document.getElementsByName("exerciseName");
+  let exerciseDurations = document.getElementsByName("exerciseDuration");
+  for (let i = 0; i < exerciseNames.length; i++) {
+    workoutData.exercises.push({
+      name: exerciseNames[i].value,
+      duration: parseInt(exerciseDurations[i].value),
+    });
   }
+
+  // Send data to server
+  fetch("/api/workouts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(workoutData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Handle success
+      console.log("Workout created:", data);
+      clearForm();
+    })
+    .catch((error) => {
+      // Handle error
+      console.error("Error creating workout:", error);
+    });
 }
 
 function clearForm() {
@@ -106,4 +92,21 @@ function clearForm() {
   while (exerciseSection.firstChild) {
     exerciseSection.removeChild(exerciseSection.firstChild);
   }
+}
+
+// Function to fetch and display all workouts
+function displayAllWorkouts() {
+  fetch("/workouts")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((tasks) => {
+      console.log("All workouts:", tasks);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
