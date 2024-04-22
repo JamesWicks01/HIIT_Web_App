@@ -32,7 +32,7 @@ function loadWorkouts() {
       });
       newContent.appendChild(exerciseList);
 
-      newContent.innerHTML += `<button>START WORKOUT</button>`;
+      newContent.innerHTML += `<button id=${workout.id}>START WORKOUT</button>`;
 
       // Set color based on intensity with transparency
       let intensityColor = "";
@@ -43,7 +43,7 @@ function loadWorkouts() {
       } else if (workout.intensity.toLowerCase() === "high") {
         intensityColor = "rgba(255, 0, 0, 0.5)"; // Red
       } else {
-        intensityColor = "rgb(0, 0, 0)"; 
+        intensityColor = "rgb(0, 0, 0)";
       }
       newCollapsible.style.backgroundColor = intensityColor;
 
