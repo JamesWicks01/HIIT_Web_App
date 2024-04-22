@@ -1,3 +1,22 @@
+// Function to active the selected workout
+function ActivateWorkout(workoutID) {
+  let targetId = workoutID;
+  // Retrieve the data from local storage.workouts
+  let storedWorkouts = JSON.parse(localStorage.getItem("workouts"));
+  // Check if data exists and iterate over each entry
+  if (storedWorkouts) {
+    storedWorkouts.forEach((workout) => {
+      // Check if the current workout has the target ID
+      if (workout.id === targetId) {
+        // Copy the selected workout data to another local storage called activeworkout and redirects to the run workout page
+        localStorage.setItem("activeworkout", JSON.stringify(workout));
+        console.log("Workout Activated");
+        window.location = "/run-workout";
+      }
+    });
+  }
+}
+
 function loadWorkouts() {
   let workouts = JSON.parse(localStorage.getItem("workouts")) || [];
 
@@ -32,7 +51,18 @@ function loadWorkouts() {
       });
       newContent.appendChild(exerciseList);
 
-      newContent.innerHTML += `<button id=${workout.id}>START WORKOUT</button>`;
+      // Create a button element
+      let startButton = document.createElement("button");
+      startButton.id = workout.id;
+      startButton.textContent = "START WORKOUT";
+
+      // Attach an event listener to the button
+      startButton.addEventListener("click", function () {
+        ActivateWorkout(workout.id);
+      });
+
+      // Append the button to the new content
+      newContent.appendChild(startButton);
 
       // Set color based on intensity with transparency
       let intensityColor = "";

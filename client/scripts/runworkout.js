@@ -1,5 +1,5 @@
 function ExitWorkout() {
-  window.location = "/workout_searcher";
+  window.location = "/workout-searcher";
 }
 
 function init() {
