@@ -9,6 +9,18 @@ function LoadDashboard() {
   window.location = "/";
 }
 
+// Function that creates a random id from a list of characters for an inputed length
+function generateRandomId(length) {
+  let result = "";
+  let characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
 function addExercise() {
   // Create new input elements for exercise
   let exerciseNameInput = document.createElement("input");
@@ -33,6 +45,7 @@ function addExercise() {
 }
 
 function createWorkout() {
+  let id = generateRandomId(16);
   let intensity = document.getElementById("intensity").value;
   let title = document.getElementById("workoutTitle").value;
   let type = document.getElementById("workoutType").value;
@@ -60,6 +73,7 @@ function createWorkout() {
 
   // Save the workout data to local storage
   let workout = {
+    id: id,
     intensity: intensity,
     title: title,
     type: type,
@@ -107,3 +121,14 @@ function clearForm() {
     exerciseSection.removeChild(exerciseSection.firstChild);
   }
 }
+
+function init() {
+  const BackButton = document.getElementById("BackButton");
+  BackButton.addEventListener("click", LoadDashboard);
+  const AddExerciseButton = document.getElementById("AddExerciseButton");
+  AddExerciseButton.addEventListener("click", addExercise);
+  const CreateWorkoutButton = document.getElementById("CreateWorkoutButton");
+  CreateWorkoutButton.addEventListener("click", createWorkout);
+}
+
+window.addEventListener("load", init);
