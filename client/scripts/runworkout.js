@@ -28,7 +28,7 @@ function runWorkout() {
     timeRemaining--;
     updateUI();
 
-    if (timeRemaining <= 0) {
+    if (timeRemaining < 0) {
       clearInterval(timer);
       currentExerciseIndex++;
       if (currentExerciseIndex < workoutData.exercises.length) {
