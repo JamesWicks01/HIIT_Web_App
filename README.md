@@ -22,4 +22,3 @@ This feature grants users the flexibility to choose the visibility of their crea
 This feature enables users to initiate their chosen workout. The screen displays a countdown for the current exercise, previews what's coming up next in a corner, and includes a user-friendly pause button for the flexibility to pause the workout session at the user's request.
 
 ## Know Issues
-- When using the workout searcher, the included exercises in the selected workout dropdown are displayed as "[Object, object]" instead of providing the more informative format of "[Exercise Name, Duration]."
