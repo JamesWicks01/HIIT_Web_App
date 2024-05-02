@@ -45,7 +45,6 @@ function addExercise() {
 }
 
 function createWorkout() {
-
   let id = generateRandomId(16);
   let intensity = document.getElementById("intensity").value;
   let title = document.getElementById("workoutTitle").value;
@@ -55,16 +54,20 @@ function createWorkout() {
   let visibility = document.getElementById("visibility").value;
   let errorText = document.querySelector("#errorMessage");
 
-  // Collect exercise data
+  // Access exercise details
   let exerciseNames = document.getElementsByName("exerciseName");
   let exerciseDurations = document.getElementsByName("exerciseDuration");
-  for (let i = 0; i < exerciseNames.length; i++) {
-    workoutData.exercises.push({
-      name: exerciseNames[i].value,
-      duration: parseInt(exerciseDurations[i].value),
-    });
-  }
 
+  // Process exercise details as needed
+  let exercises = [];
+  let totalDuration = 0; // Initialize total duration
+  for (let i = 0; i < exerciseNames.length; i++) {
+    let name = exerciseNames[i].value;
+    let duration = parseInt(exerciseDurations[i].value); // Parse duration to integer
+    // Add your logic to handle exercise details
+    exercises.push({ name: name, duration: duration });
+    totalDuration += duration; // Add exercise duration to total duration
+  }
 
   let duration = totalDuration.toString(); // Convert total duration to string
 
@@ -102,7 +105,6 @@ function createWorkout() {
     // Clears the form after saving
     clearForm();
   }
-
 }
 
 function clearForm() {
@@ -119,7 +121,6 @@ function clearForm() {
     exerciseSection.removeChild(exerciseSection.firstChild);
   }
 }
-
 
 function init() {
   const BackButton = document.getElementById("BackButton");

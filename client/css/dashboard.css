@@ -4,25 +4,21 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
+  background-color: gray;
 }
 
 h1 {
-  color: #333;
+  color: white;
 }
 
 button {
+  background-color: green;
   padding: 10px 15px;
-  margin: 10px;
-  font-size: 16px;
+  margin: 30px;
+  font-size: 24px;
+  border: 50px;
 }
 
-/* Apply mobile-specific styles using media query */
-@media (max-width: 600px) {
-  h1 {
-    font-size: 24px;
-  }
-
-  button {
-    font-size: 14px;
-  }
+button:hover {
+  background-color: greenyellow;
 }
