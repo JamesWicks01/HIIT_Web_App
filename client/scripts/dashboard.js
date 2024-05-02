@@ -1,13 +1,13 @@
 function LoadCreateWorkout() {
-  window.location = "workout-creator";
+  window.location = "workout_creator.html";
 }
 
 function LoadSearchedWorkout() {
-  window.location = "workout-searcher";
+  window.location = "workout_searcher.html";
 }
 
 function LoadDailyWorkout() {
-  window.location = "daily-workout";
+  window.location = "daily_workout.html";
 }
 
 function ChangeWelcomeName() {

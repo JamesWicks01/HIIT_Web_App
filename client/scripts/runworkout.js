@@ -70,7 +70,7 @@ function runWorkout() {
     currentExerciseIndex = 0;
     timeRemaining = workoutData.exercises[currentExerciseIndex].duration;
     updateUI();
-    window.location = "/workout-searcher";
+    window.location = "/workout_searcher.html";
   }
 
   // Registering the Buttons in the page

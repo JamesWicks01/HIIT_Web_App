@@ -6,7 +6,7 @@ window.onload = function () {
 };
 
 function LoadDashboard() {
-  window.location = "/";
+  window.location = "/index.html";
 }
 
 // Function that creates a random id from a list of characters for an inputed length

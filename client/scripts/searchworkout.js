@@ -11,7 +11,7 @@ function ActivateWorkout(workoutID) {
         // Copy the selected workout data to another local storage called activeworkout and redirects to the run workout page
         localStorage.setItem("activeworkout", JSON.stringify(workout));
         console.log("Workout Activated");
-        window.location = "/run-workout";
+        window.location = "/run_workout.html";
       }
     });
   }
@@ -96,7 +96,7 @@ function loadWorkouts() {
 }
 
 function LoadDashboard() {
-  window.location = "/";
+  window.location = "/index.html";
 }
 
 function init() {

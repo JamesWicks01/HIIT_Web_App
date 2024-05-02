@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "REMOVE ME: Introduce the key features, paying special attention to the non-code ones.  Tell us briefly how to find & use them, and describes the reasons behind the design decisions you made in their implementation.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd server && node server.js"
+    "start": "node svr.js"
   },
   "repository": {
     "type": "git",
