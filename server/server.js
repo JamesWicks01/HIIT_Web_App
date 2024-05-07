@@ -24,6 +24,12 @@ app.get("/workout-searcher", (req, res) => {
   );
 });
 
+app.get("/your-workouts", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "..", "client", "pages", "your_workouts.html")
+  );
+});
+
 app.get("/daily-workout", (req, res) => {
   res.sendFile(
     path.join(__dirname, "..", "client", "pages", "daily_workout.html")

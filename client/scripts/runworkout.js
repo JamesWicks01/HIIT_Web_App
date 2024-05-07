@@ -1,5 +1,4 @@
 function runWorkout() {
-  // Retrieving the workout data from local storage
   const workoutData = JSON.parse(localStorage.getItem("activeworkout"));
 
   let currentExerciseIndex = 0;
@@ -70,7 +69,7 @@ function runWorkout() {
     currentExerciseIndex = 0;
     timeRemaining = workoutData.exercises[currentExerciseIndex].duration;
     updateUI();
-    window.location = "/workout-searcher";
+    window.location = "/";
   }
 
   // Registering the Buttons in the page

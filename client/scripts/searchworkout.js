@@ -1,14 +1,13 @@
-// Function to active the selected workout
+//A function to active the selected workout
 function ActivateWorkout(workoutID) {
   let targetId = workoutID;
-  // Retrieve the data from local storage.workouts
+  //Retrieve the data from local storage
   let storedWorkouts = JSON.parse(localStorage.getItem("workouts"));
-  // Check if data exists and iterate over each entry
   if (storedWorkouts) {
     storedWorkouts.forEach((workout) => {
-      // Check if the current workout has the target ID
+      //Check if the current workout has the target ID
       if (workout.id === targetId) {
-        // Copy the selected workout data to another local storage called activeworkout and redirects to the run workout page
+        //Copy the selected workout data to another local storage called activeworkout and redirects to the run workout page
         localStorage.setItem("activeworkout", JSON.stringify(workout));
         console.log("Workout Activated");
         window.location = "/run-workout";
@@ -16,16 +15,14 @@ function ActivateWorkout(workoutID) {
     });
   }
 }
-
+//A function that loads all the workouts that are saved into the page
 function loadWorkouts() {
   let workouts = JSON.parse(localStorage.getItem("workouts")) || [];
-
   for (let i = 0; i < workouts.length; i++) {
     let workout = workouts[i];
-
-    // Check if visibility is public
+    // Checks if visibility is public
     if (workout.visibility === "Public") {
-      // Create collapsible content for each saved workout
+      //Creates collapsible content for each saved workout
       let workoutContainer = document.getElementById("workoutContainer");
       let newCollapsible = document.createElement("button");
       newCollapsible.classList.add("collapsible");
@@ -41,8 +38,7 @@ function loadWorkouts() {
             <p>Created By: ${workout.createdBy}</p>
             <p>Included Exercises:</p>
         `;
-
-      // Loop through exercises and display each one
+      //Loops through exercises and display each one
       let exerciseList = document.createElement("ul");
       workout.exercises.forEach((exercise) => {
         let exerciseItem = document.createElement("li");
@@ -50,38 +46,34 @@ function loadWorkouts() {
         exerciseList.appendChild(exerciseItem);
       });
       newContent.appendChild(exerciseList);
-
-      // Create a button element
+      //Creates a button element for starting a workout
       let startButton = document.createElement("button");
       startButton.id = workout.id;
       startButton.textContent = "START WORKOUT";
-
-      // Attach an event listener to the button
+      //Attaches an event listener to the start workout button 
       startButton.addEventListener("click", function () {
         ActivateWorkout(workout.id);
       });
-
-      // Append the button to the new content
+      //Appends the button to the new content
       newContent.appendChild(startButton);
-
-      // Set color based on intensity with transparency
+      //Sets color based on intensity
       let intensityColor = "";
       if (workout.intensity.toLowerCase() === "low") {
-        intensityColor = "rgba(18, 125, 24, 0.5)"; // Green
+        intensityColor = "rgba(18, 125, 24, 0.5)";
       } else if (workout.intensity.toLowerCase() === "medium") {
-        intensityColor = "rgba(255, 165, 0, 0.5)"; // Orange
+        intensityColor = "rgba(255, 165, 0, 0.5)";
       } else if (workout.intensity.toLowerCase() === "high") {
-        intensityColor = "rgba(255, 0, 0, 0.5)"; // Red
+        intensityColor = "rgba(255, 0, 0, 0.5)";
       } else {
         intensityColor = "rgb(0, 0, 0)";
       }
       newCollapsible.style.backgroundColor = intensityColor;
 
-      // Append the collapsible content
+      //Appends the collapsible content
       workoutContainer.appendChild(newCollapsible);
       workoutContainer.appendChild(newContent);
 
-      // Add event listener to the collapsible
+      //Adds event listener to the collapsible
       newCollapsible.addEventListener("click", function () {
         this.classList.toggle("active");
         let content = this.nextElementSibling;

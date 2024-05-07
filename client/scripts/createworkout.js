@@ -1,7 +1,6 @@
-// Load existing data from local storage when the page loads
+//Load existing data from local storage when the page loads
 window.onload = function () {
   let savedWorkouts = JSON.parse(localStorage.getItem("workouts")) || [];
-  // Display the saved workouts in the console
   console.log("Saved Workouts:", savedWorkouts);
 };
 
@@ -9,7 +8,7 @@ function LoadDashboard() {
   window.location = "/";
 }
 
-// Function that creates a random id from a list of characters for an inputed length
+//A unction that creates a random id from a list of characters for an inputed length
 function generateRandomId(length) {
   let result = "";
   let characters =
@@ -20,9 +19,8 @@ function generateRandomId(length) {
   }
   return result;
 }
-
+//A function that creates the exercies elements when this function is called
 function addExercise() {
-  // Create new input elements for exercise
   let exerciseNameInput = document.createElement("input");
   exerciseNameInput.type = "text";
   exerciseNameInput.name = "exerciseName";
@@ -32,7 +30,6 @@ function addExercise() {
   exerciseDurationInput.type = "text";
   exerciseDurationInput.name = "exerciseDuration";
   exerciseDurationInput.required = true;
-
   // Append new inputs to the exercise section
   document
     .getElementById("exerciseSection")
@@ -43,7 +40,7 @@ function addExercise() {
     .appendChild(document.createTextNode("Exercise Duration (Seconds): "));
   document.getElementById("exerciseSection").appendChild(exerciseDurationInput);
 }
-
+//A function that creates a new workout
 function createWorkout() {
   let id = generateRandomId(16);
   let intensity = document.getElementById("intensity").value;
@@ -53,22 +50,18 @@ function createWorkout() {
   let createdBy = document.getElementById("createdBy").value;
   let visibility = document.getElementById("visibility").value;
   let errorText = document.querySelector("#errorMessage");
-
-  // Access exercise details
   let exerciseNames = document.getElementsByName("exerciseName");
   let exerciseDurations = document.getElementsByName("exerciseDuration");
 
-  // Process exercise details as needed
   let exercises = [];
-  let totalDuration = 0; // Initialize total duration
+  //Combinds all the exercise durations to create a total duration 
+  let totalDuration = 0;
   for (let i = 0; i < exerciseNames.length; i++) {
     let name = exerciseNames[i].value;
-    let duration = parseInt(exerciseDurations[i].value); // Parse duration to integer
-    // Add your logic to handle exercise details
+    let duration = parseInt(exerciseDurations[i].value);
     exercises.push({ name: name, duration: duration });
-    totalDuration += duration; // Add exercise duration to total duration
+    totalDuration += duration;
   }
-
   let duration = totalDuration.toString(); // Convert total duration to string
 
   // Save the workout data to local storage
@@ -83,7 +76,6 @@ function createWorkout() {
     visibility: visibility,
     exercises: exercises,
   };
-
   if (
     intensity === "" ||
     title === "" ||
@@ -98,24 +90,17 @@ function createWorkout() {
     let savedWorkouts = JSON.parse(localStorage.getItem("workouts")) || [];
     savedWorkouts.push(workout);
     localStorage.setItem("workouts", JSON.stringify(savedWorkouts));
-
-    // Logs the saved workouts in the console
     console.log("Saved Workouts:", savedWorkouts);
-
-    // Clears the form after saving
-    clearForm();
+        clearForm();
   }
 }
-
+//A function that clear the form when this function is called
 function clearForm() {
-  // Clear the form inputs
   document.getElementById("intensity").value = "Low";
   document.getElementById("workoutTitle").value = "";
   document.getElementById("workoutType").value = "";
   document.getElementById("workoutDescription").value = "";
   document.getElementById("createdBy").value = "";
-
-  // Remove exercise inputs
   let exerciseSection = document.getElementById("exerciseSection");
   while (exerciseSection.firstChild) {
     exerciseSection.removeChild(exerciseSection.firstChild);
