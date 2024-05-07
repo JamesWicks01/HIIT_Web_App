@@ -21,4 +21,16 @@ This feature grants users the flexibility to choose the visibility of their crea
 ### Run Your Own or a Community Workout
 This feature enables users to initiate their chosen workout. The screen displays a countdown for the current exercise, previews what's coming up next in a corner, and includes a user-friendly pause button for the flexibility to pause the workout session at the user's request.
 
-## Know Issues
+## Use of AI
+### Prompt to develop the edit workout feature in "Your Workouts"
+For this feature in the "Your Workouts" page I used this prompt to make the edit workout form into a pop up for above the orginal content of the page.
+> How do you make a form to pop-up in the window.
+
+From this prompt I made two different section called "popup" and "popup-content" and created the form over the section "popup" and called the form class "popup-content". Also added css to make the form popup over the exisitng content using these lines of css. 
+```css
+.popup {
+  display: none; /* Hide the pop-up by default */
+  position: fixed; /* Position the pop-up */
+  z-index: 1; /* Make sure it appears above other elements */
+}
+```
