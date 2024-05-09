@@ -7,9 +7,8 @@ const port = 8080;
 // Serve static files from the 'client' folder
 app.use(express.static(path.join(__dirname, "..", "client")));
 
-// Route for the index.html page
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "client", "pages", "dashboard.html"));
+  res.sendFile(path.join(__dirname, "..", "client", "pages", "index.html"));
 });
 
 app.get("/workout-creator", (req, res) => {
@@ -27,12 +26,6 @@ app.get("/workout-searcher", (req, res) => {
 app.get("/your-workouts", (req, res) => {
   res.sendFile(
     path.join(__dirname, "..", "client", "pages", "your_workouts.html")
-  );
-});
-
-app.get("/daily-workout", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "..", "client", "pages", "daily_workout.html")
   );
 });
 

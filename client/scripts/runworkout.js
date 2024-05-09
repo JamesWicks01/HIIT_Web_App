@@ -9,6 +9,8 @@ function runWorkout() {
     document.querySelector("#WorkoutTitle").textContent = workoutData.title;
     document.querySelector("#currentExerciseName").textContent =
       workoutData.exercises[currentExerciseIndex].name;
+      document.querySelector("#currentExerciseDescription").textContent =
+      workoutData.exercises[currentExerciseIndex].description;
     document.querySelector("#timeRemaining").textContent =
       "Time Remaining: " + timeRemaining + "s";
     document.querySelector("#nextExerciseName").textContent = workoutData
@@ -69,6 +71,7 @@ function runWorkout() {
     currentExerciseIndex = 0;
     timeRemaining = workoutData.exercises[currentExerciseIndex].duration;
     updateUI();
+    localStorage.removeItem("activeworkout");
     window.location = "/";
   }
 

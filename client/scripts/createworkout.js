@@ -30,6 +30,11 @@ function addExercise() {
   exerciseDurationInput.type = "text";
   exerciseDurationInput.name = "exerciseDuration";
   exerciseDurationInput.required = true;
+
+  let exerciseDescriptionInput = document.createElement("input");
+  exerciseDescriptionInput.type = "text";
+  exerciseDescriptionInput.name = "exerciseDescription";
+  exerciseDescriptionInput.required = true;
   // Append new inputs to the exercise section
   document
     .getElementById("exerciseSection")
@@ -39,6 +44,10 @@ function addExercise() {
     .getElementById("exerciseSection")
     .appendChild(document.createTextNode("Exercise Duration (Seconds): "));
   document.getElementById("exerciseSection").appendChild(exerciseDurationInput);
+  document
+  .getElementById("exerciseSection")
+  .appendChild(document.createTextNode("Exercise Descirption"));
+document.getElementById("exerciseSection").appendChild(exerciseDescriptionInput);
 }
 //A function that creates a new workout
 function createWorkout() {
@@ -52,14 +61,16 @@ function createWorkout() {
   let errorText = document.querySelector("#errorMessage");
   let exerciseNames = document.getElementsByName("exerciseName");
   let exerciseDurations = document.getElementsByName("exerciseDuration");
+  let exerciseDescription = document.getElementsByName("exerciseDescription");
 
   let exercises = [];
-  //Combinds all the exercise durations to create a total duration 
+  //Combinds all the exercise durations to create a total duration
   let totalDuration = 0;
   for (let i = 0; i < exerciseNames.length; i++) {
     let name = exerciseNames[i].value;
     let duration = parseInt(exerciseDurations[i].value);
-    exercises.push({ name: name, duration: duration });
+    let exercisedesc = exerciseDescription[i].value;
+    exercises.push({ name: name, duration: duration, description: exercisedesc });
     totalDuration += duration;
   }
   let duration = totalDuration.toString(); // Convert total duration to string
@@ -91,7 +102,7 @@ function createWorkout() {
     savedWorkouts.push(workout);
     localStorage.setItem("workouts", JSON.stringify(savedWorkouts));
     console.log("Saved Workouts:", savedWorkouts);
-        clearForm();
+    clearForm();
   }
 }
 //A function that clear the form when this function is called

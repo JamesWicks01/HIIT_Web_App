@@ -1,9 +1,11 @@
 body {
   font-family: Arial, sans-serif;
+  background-color: gray;
 }
 
 h2 {
   text-align: center;
+  color: white;
 }
 
 form {
@@ -11,6 +13,7 @@ form {
   margin: 0 auto;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: lightgrey;
 }
 
 label {
@@ -28,15 +31,12 @@ textarea {
 }
 
 button {
-  background-color: #223e93;
-  color: white;
+  background-color: green;
   padding: 10px 15px;
-  border: none;
-  cursor: pointer;
+  margin: 10px;
+  font-size: 16px;
+  color: white;
 }
-
-@media only screen and (max-width: 600px) {
-  form {
-    padding: 10px;
-  }
+button:hover {
+  background-color: greenyellow;
 }

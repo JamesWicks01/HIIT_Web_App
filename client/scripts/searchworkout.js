@@ -33,7 +33,7 @@ function loadWorkouts() {
       newContent.innerHTML = `
             <p>Workout Type: ${workout.type}</p>
             <p>Workout Intensity: ${workout.intensity}</p>
-            <p>Workout Duration: ${workout.duration}</p>
+            <p>Workout Duration: ${workout.duration} seconds</p>
             <p>Workout Description: ${workout.description}</p>
             <p>Created By: ${workout.createdBy}</p>
             <p>Included Exercises:</p>
@@ -42,7 +42,7 @@ function loadWorkouts() {
       let exerciseList = document.createElement("ul");
       workout.exercises.forEach((exercise) => {
         let exerciseItem = document.createElement("li");
-        exerciseItem.textContent = `${exercise.name} - Duration: ${exercise.duration}`;
+        exerciseItem.textContent = `${exercise.name} - Duration: ${exercise.duration} seconds`;
         exerciseList.appendChild(exerciseItem);
       });
       newContent.appendChild(exerciseList);
@@ -50,7 +50,7 @@ function loadWorkouts() {
       let startButton = document.createElement("button");
       startButton.id = workout.id;
       startButton.textContent = "START WORKOUT";
-      //Attaches an event listener to the start workout button 
+      //Attaches an event listener to the start workout button
       startButton.addEventListener("click", function () {
         ActivateWorkout(workout.id);
       });

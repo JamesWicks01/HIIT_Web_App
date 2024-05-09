@@ -1,3 +1,13 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: gray;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
 .collapsible {
   background-color: #777;
   color: white;
@@ -44,7 +54,7 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
 }
 
 .popup-content {
@@ -57,7 +67,6 @@
 /* Close Button */
 .close {
   color: #aaa;
-  float: right;
   font-size: 28px;
   font-weight: bold;
 }
@@ -69,4 +78,15 @@ textarea {
   padding: 8px;
   margin-bottom: 10px;
   box-sizing: border-box;
+}
+
+#BackButton {
+  background-color: green;
+  padding: 10px 15px;
+  margin: 10px;
+  font-size: 16px;
+  color: white;
+}
+#BackButton:hover {
+  background-color: greenyellow;
 }
