@@ -15,144 +15,47 @@ function ActivateWorkout(workoutID) {
     });
   }
 }
-//A function to edit the selected workout
-function EditWorkout(workoutId) {
-  // Retrieve workouts from local storage
-  let workouts = JSON.parse(localStorage.getItem("workouts")) || [];
-
-  // Find the workout with the provided ID
-  let workoutIndex = workouts.findIndex((workout) => workout.id === workoutId);
-  if (workoutIndex !== -1) {
-    let workout = workouts[workoutIndex];
-
-    // Create a modal for editing workout details
-    let popup = document.createElement("div");
-    popup.classList.add("popup");
-
-    // Modal content
-    let popupContent = document.createElement("div");
-    popupContent.classList.add("popup-content");
-
-    // Close button for the modal
-    let closeButton = document.createElement("span");
-    closeButton.classList.add("close");
-    closeButton.innerHTML = "&times;";
-    closeButton.addEventListener("click", function () {
-      popup.style.display = "none";
-    });
-
-    // Form for editing workout details
-    let form = document.createElement("form");
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      // Update workout details
-      workouts[workoutIndex].title = this.title.value;
-      workouts[workoutIndex].type = this.type.value;
-      workouts[workoutIndex].intensity = this.intensity.value;
-      workouts[workoutIndex].duration = this.duration.value;
-      workouts[workoutIndex].description = this.description.value;
-      workouts[workoutIndex].createdBy = this.createdBy.value;
-      // Update exercise details
-      workouts[workoutIndex].exercises = [];
-      let exerciseItems = document.querySelectorAll("#exercisesList li");
-      exerciseItems.forEach((item) => {
-        let name = item.querySelector("input[name='exerciseName']").value;
-        let duration = item.querySelector(
-          "input[name='exerciseDuration']"
-        ).value;
-        workouts[workoutIndex].exercises.push({ name, duration });
-      });
-      // Save updated workouts to local storage
-      localStorage.setItem("workouts", JSON.stringify(workouts));
-      // Close modal after submission
-      popup.style.display = "none";
-      // Refresh displayed workouts
-      location.reload();
-    });
-
-    // Form fields pre-filled with existing workout details
-    form.innerHTML = `
-      <label for="title">Title:</label>
-      <input type="text" id="title" name="title" value="${workout.title}">
-      <br>
-      <label for="type">Type:</label>
-      <input type="text" id="type" name="type" value="${workout.type}">
-      <br>
-      <label for="intensity">Intensity:</label>
-      <input type="text" id="intensity" name="intensity" value="${
-        workout.intensity
-      }">
-      <br>
-      <label for="duration">Duration:</label>
-      <input type="text" id="duration" name="duration" value="${
-        workout.duration
-      }">
-      <br>
-      <label for="description">Description:</label>
-      <textarea id="description" name="description">${
-        workout.description
-      }</textarea>
-      <br>
-      <label for="createdBy">Created By:</label>
-      <input type="text" id="createdBy" name="createdBy" value="${
-        workout.createdBy
-      }">
-      <br>
-      <label for="exercises">Exercises:</label>
-      <ul id="exercisesList">
-        ${workout.exercises
-          .map(
-            (exercise) => `
-            <label for="exerciseName">Exercise Name:</label>
-            <input type="text" name="exerciseName" value="${exercise.name}">
-            <label for="exerciseDuration">Exercise Duration (Seconds):</label>
-            <input type="text" name="exerciseDuration" value="${exercise.duration}">
-            <label for="exerciseDescription">Exercise Description:</label>
-            <input type="text" name="exerciseDescription" value="${exercise.description}">
-        `
-          )
-          .join("")}
-      </ul>
-      <input type="submit" value="Save">
-    `;
-
-    // Append elements to modal content
-    popupContent.appendChild(closeButton);
-    popupContent.appendChild(form);
-    popup.appendChild(popupContent);
-
-    // Append modal to the body
-    document.body.appendChild(popup);
-
-    // Display modal
-    popup.style.display = "block";
-  } else {
-    console.error("Workout not found");
-  }
-}
-
 //A function that deletes the selected workout
 function DeleteWorkout(workoutID) {
+  let popup = document.querySelector("#DeleteWorkout");
+  let yesButton = document.querySelector("#yesButton");
+  let noButton = document.querySelector("#noButton");
   let storedWorkouts = JSON.parse(localStorage.getItem("workouts"));
   if (storedWorkouts) {
-    //Filters out the workout with the specified ID
-    let updatedWorkouts = storedWorkouts.filter(
-      (workout) => workout.id !== workoutID
-    );
-    localStorage.setItem("workouts", JSON.stringify(updatedWorkouts));
-    //Reloads the page to reflect the changes
-    location.reload();
-    console.log("Workout Deleted");
+    //Displays the popup window the show are you sure you want to delete this
+    popup.style.display = "block";
+    yesButton.addEventListener("click", function () {
+      //Filters out the workout with the specified ID
+      let updatedWorkouts = storedWorkouts.filter(
+        (workout) => workout.id !== workoutID
+      );
+      localStorage.setItem("workouts", JSON.stringify(updatedWorkouts));
+      //Reloads the page to reflect the changes
+      location.reload();
+      console.log("Workout Deleted");
+    });
+    noButton.addEventListener("click", function () {
+      //Removes the popup window from the screen
+      popup.style.display = "none";
+    });
   }
 }
 //A function that loads all the workouts that are saved into the page
 function loadWorkouts() {
   let workouts = JSON.parse(localStorage.getItem("workouts")) || [];
+  //Checks to see if the new user workout only exists
+  //If it does then shows the message that the user doesn't have any workouts
+  if (workouts.length <= 1) {
+    let errorMessage = document.querySelector("#errorMessage");
+    errorMessage.textContent = "You Have No Workouts That Are Yours";
+    console.log("No Workouts are you own");
+  }
 
   for (let i = 0; i < workouts.length; i++) {
     let workout = workouts[i];
-    //Creates collapsible content for each saved workout
+    //Removes the workout that is created when a new user uses the web app
     if (workout.id != "exampleID") {
+      //Creates collapsible content for each saved workout
       let workoutContainer = document.getElementById("workoutContainer");
       let newCollapsible = document.createElement("button");
       newCollapsible.classList.add("collapsible");
@@ -183,10 +86,6 @@ function loadWorkouts() {
       startButton.id = workout.id;
       startButton.textContent = "START WORKOUT";
 
-      let editButton = document.createElement("button");
-      editButton.id = workout.id;
-      editButton.textContent = "EDIT WORKOUT";
-
       let deleteButton = document.createElement("button");
       deleteButton.id = workout.id;
       deleteButton.textContent = "DELETE WORKOUT";
@@ -195,15 +94,11 @@ function loadWorkouts() {
       startButton.addEventListener("click", function () {
         ActivateWorkout(workout.id);
       });
-      editButton.addEventListener("click", function () {
-        EditWorkout(workout.id);
-      });
       deleteButton.addEventListener("click", function () {
         DeleteWorkout(workout.id);
       });
       //Appends the button to the new content
       newContent.appendChild(startButton);
-      newContent.appendChild(editButton);
       newContent.appendChild(deleteButton);
 
       //Sets color based on intensity
@@ -233,16 +128,14 @@ function loadWorkouts() {
           content.style.maxHeight = content.scrollHeight + "px";
         }
       });
-    } else {
-      console.log('No Workouts are you own')
     }
   }
 }
-
+// A function to load the dashboard page when called
 function LoadDashboard() {
   window.location = "/";
 }
-
+// A fucntion when it is called that makes the buttons work when called
 function init() {
   loadWorkouts();
   const BackButton = document.querySelector("#BackButton");

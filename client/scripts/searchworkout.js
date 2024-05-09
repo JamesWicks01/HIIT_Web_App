@@ -86,11 +86,11 @@ function loadWorkouts() {
     }
   }
 }
-
+// A function to load the dashboard page when called 
 function LoadDashboard() {
   window.location = "/";
 }
-
+// A fucntion when it is called that makes the buttons work when called
 function init() {
   loadWorkouts();
   const BackButton = document.querySelector("#BackButton");

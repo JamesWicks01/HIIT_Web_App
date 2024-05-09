@@ -3,12 +3,12 @@ window.onload = function () {
   let savedWorkouts = JSON.parse(localStorage.getItem("workouts")) || [];
   console.log("Saved Workouts:", savedWorkouts);
 };
-
+// A function to load the dashboard page when called 
 function LoadDashboard() {
   window.location = "/";
 }
 
-//A unction that creates a random id from a list of characters for an inputed length
+//A function that creates a random id from a list of characters for an inputed length
 function generateRandomId(length) {
   let result = "";
   let characters =
@@ -35,7 +35,7 @@ function addExercise() {
   exerciseDescriptionInput.type = "text";
   exerciseDescriptionInput.name = "exerciseDescription";
   exerciseDescriptionInput.required = true;
-  // Append new inputs to the exercise section
+  // Appends the  new inputs to the exercise section
   document
     .getElementById("exerciseSection")
     .appendChild(document.createTextNode("Exercise Name: "));
@@ -73,7 +73,7 @@ function createWorkout() {
     exercises.push({ name: name, duration: duration, description: exercisedesc });
     totalDuration += duration;
   }
-  let duration = totalDuration.toString(); // Convert total duration to string
+  let duration = totalDuration.toString();
 
   // Save the workout data to local storage
   let workout = {
@@ -117,7 +117,7 @@ function clearForm() {
     exerciseSection.removeChild(exerciseSection.firstChild);
   }
 }
-
+// A fucntion when it is called that makes the buttons work when called
 function init() {
   const BackButton = document.getElementById("BackButton");
   BackButton.addEventListener("click", LoadDashboard);
@@ -126,5 +126,4 @@ function init() {
   const CreateWorkoutButton = document.getElementById("CreateWorkoutButton");
   CreateWorkoutButton.addEventListener("click", createWorkout);
 }
-
 window.addEventListener("load", init);

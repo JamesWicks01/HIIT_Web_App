@@ -3,7 +3,7 @@ window.onload = function () {
   let savedWorkouts = JSON.parse(localStorage.getItem("workouts")) || [];
   console.log("Saved Workouts:", savedWorkouts);
 };
-
+//Functions that load the relavent page when the function is called
 function LoadCreateWorkout() {
   window.location = "workout-creator";
 }
@@ -13,12 +13,12 @@ function LoadSearchedWorkout() {
 function LoadYourWorkouts() {
   window.location = "your-workouts";
 }
-
+//A function that checks to see if an ID exists in local storage workouts
 function isIdExists(id) {
   let savedWorkouts = JSON.parse(localStorage.getItem("workouts")) || [];
   return savedWorkouts.some((workout) => workout.id === id);
 }
-
+//A function that creates a defult workout from new users to uses
 function CreateExampleWorkout() {
   const ExampleWorkout = {
     id: "exampleID",
@@ -63,6 +63,8 @@ function CreateExampleWorkout() {
       },
     ],
   };
+  //Checks to see if the new user workout exists
+  //If it does exist it will add the new user workout that is show above
   if (isIdExists(ExampleWorkout.id)) {
     console.log(`ID exists.`);
   } else {
@@ -72,7 +74,7 @@ function CreateExampleWorkout() {
     localStorage.setItem("workouts", JSON.stringify(savedWorkouts));
   }
 }
-
+// A fucntion when it is called that makes the buttons work when called
 function init() {
   CreateExampleWorkout();
   const CreateWorkoutButton = document.querySelector("#createWorkout");

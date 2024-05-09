@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/workout_searcher.css" />
     <script src="../scripts/yourworkouts.js"></script>
-    <link rel="manifest" href="../manifest.json">
+    <link rel="manifest" href="../manifest.json" />
     <title>HIIT Web App</title>
   </head>
   <body>
@@ -13,7 +13,16 @@
 
     <!-- Container for workout details -->
     <div id="workoutContainer"></div>
+    <h2 id="errorMessage"></h2>
     <br />
     <button id="BackButton">Back</button>
+
+    <div class="popup" id="DeleteWorkout">
+      <div id="popup-content">
+        <h2>Are You Sure You Want To Delete this Workout</h2>
+        <button id="yesButton">Yes</button>
+        <button id="noButton">No</button>
+      </div>
+    </div>
   </body>
 </html>

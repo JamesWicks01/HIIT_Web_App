@@ -8,6 +8,11 @@ h1 {
   color: white;
 }
 
+h2 {
+  text-align: center;
+  color: rgb(106, 20, 20);
+}
+
 .collapsible {
   background-color: #777;
   color: white;
@@ -57,12 +62,13 @@ h1 {
   background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
 }
 
-.popup-content {
+#popup-content {
   background-color: #fefefe;
   margin: 10% auto; /* Center the form on the screen */
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Set width */
+  text-align: center;
 }
 /* Close Button */
 .close {
