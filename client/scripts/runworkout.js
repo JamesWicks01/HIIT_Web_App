@@ -12,8 +12,8 @@ function runWorkout() {
     document.querySelector("#WorkoutTitle").textContent = workoutData.title;
     document.querySelector("#currentExerciseName").textContent =
       workoutData.exercises[currentExerciseIndex].name;
-      document.querySelector("#currentExerciseDescription").textContent =
-      workoutData.exercises[currentExerciseIndex].description;
+      document.querySelector("#currentExerciseInstruction").textContent =
+      workoutData.exercises[currentExerciseIndex].instruction;
     document.querySelector("#timeRemaining").textContent =
       "Time Remaining: " + timeRemaining + "s";
     //Displays the next exerices but if i can't find the next exercise it will display "End of Workout"

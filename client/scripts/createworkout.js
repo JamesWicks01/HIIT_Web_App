@@ -31,10 +31,10 @@ function addExercise() {
   exerciseDurationInput.name = "exerciseDuration";
   exerciseDurationInput.required = true;
 
-  let exerciseDescriptionInput = document.createElement("input");
-  exerciseDescriptionInput.type = "text";
-  exerciseDescriptionInput.name = "exerciseDescription";
-  exerciseDescriptionInput.required = true;
+  let exerciseInstructionInput = document.createElement("input");
+  exerciseInstructionInput.type = "text";
+  exerciseInstructionInput.name = "exerciseInstruction";
+  exerciseInstructionInput.required = true;
   // Appends the  new inputs to the exercise section
   document
     .getElementById("exerciseSection")
@@ -46,8 +46,8 @@ function addExercise() {
   document.getElementById("exerciseSection").appendChild(exerciseDurationInput);
   document
   .getElementById("exerciseSection")
-  .appendChild(document.createTextNode("Exercise Descirption"));
-document.getElementById("exerciseSection").appendChild(exerciseDescriptionInput);
+  .appendChild(document.createTextNode("Exercise Instruction"));
+document.getElementById("exerciseSection").appendChild( exerciseInstructionInput);
 }
 //A function that creates a new workout
 function createWorkout() {
@@ -61,7 +61,7 @@ function createWorkout() {
   let errorText = document.querySelector("#errorMessage");
   let exerciseNames = document.getElementsByName("exerciseName");
   let exerciseDurations = document.getElementsByName("exerciseDuration");
-  let exerciseDescription = document.getElementsByName("exerciseDescription");
+  let exerciseInstruction = document.getElementsByName("exerciseInstruction");
 
   let exercises = [];
   //Combinds all the exercise durations to create a total duration
@@ -69,8 +69,8 @@ function createWorkout() {
   for (let i = 0; i < exerciseNames.length; i++) {
     let name = exerciseNames[i].value;
     let duration = parseInt(exerciseDurations[i].value);
-    let exercisedesc = exerciseDescription[i].value;
-    exercises.push({ name: name, duration: duration, description: exercisedesc });
+    let instruction =  exerciseInstruction[i].value;
+    exercises.push({ name: name, duration: duration, instruction: instruction });
     totalDuration += duration;
   }
   let duration = totalDuration.toString();
