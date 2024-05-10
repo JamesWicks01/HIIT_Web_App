@@ -1,0 +1,16 @@
+{
+    "name": "HIIT Web App",
+    "short_name": "HIIT Web App",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "A HIIT Web Application",
+    "icons": [
+      {
+        "src": "logo192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ]
+  }
+  

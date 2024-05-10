@@ -15,13 +15,46 @@ function ActivateWorkout(workoutID) {
     });
   }
 }
+//A function that deletes the selected workout
+function DeleteWorkout(workoutID) {
+  let popup = document.querySelector("#DeleteWorkout");
+  let yesButton = document.querySelector("#yesButton");
+  let noButton = document.querySelector("#noButton");
+  let storedWorkouts = JSON.parse(localStorage.getItem("workouts"));
+  if (storedWorkouts) {
+    //Displays the popup window the show are you sure you want to delete this
+    popup.style.display = "block";
+    yesButton.addEventListener("click", function () {
+      //Filters out the workout with the specified ID
+      let updatedWorkouts = storedWorkouts.filter(
+        (workout) => workout.id !== workoutID
+      );
+      localStorage.setItem("workouts", JSON.stringify(updatedWorkouts));
+      //Reloads the page to reflect the changes
+      location.reload();
+      console.log("Workout Deleted");
+    });
+    noButton.addEventListener("click", function () {
+      //Removes the popup window from the screen
+      popup.style.display = "none";
+    });
+  }
+}
 //A function that loads all the workouts that are saved into the page
 function loadWorkouts() {
   let workouts = JSON.parse(localStorage.getItem("workouts")) || [];
+  //Checks to see if the new user workout only exists
+  //If it does then shows the message that the user doesn't have any workouts
+  if (workouts.length <= 1) {
+    let errorMessage = document.querySelector("#errorMessage");
+    errorMessage.textContent = "You Have No Workouts That Are Yours";
+    console.log("No Workouts are you own");
+  }
+
   for (let i = 0; i < workouts.length; i++) {
     let workout = workouts[i];
-    // Checks if visibility is public
-    if (workout.visibility === "Public") {
+    //Removes the workout that is created when a new user uses the web app
+    if (workout.id != "exampleID") {
       //Creates collapsible content for each saved workout
       let workoutContainer = document.getElementById("workoutContainer");
       let newCollapsible = document.createElement("button");
@@ -31,13 +64,14 @@ function loadWorkouts() {
       let newContent = document.createElement("div");
       newContent.classList.add("content");
       newContent.innerHTML = `
-            <p>Workout Type: ${workout.type}</p>
-            <p>Workout Intensity: ${workout.intensity}</p>
-            <p>Workout Duration: ${workout.duration} seconds</p>
-            <p>Workout Description: ${workout.description}</p>
-            <p>Created By: ${workout.createdBy}</p>
-            <p>Included Exercises:</p>
-        `;
+              <p>Workout Type: ${workout.type}</p>
+              <p>Workout Intensity: ${workout.intensity}</p>
+              <p>Workout Duration: ${workout.duration} seconds</p>
+              <p>Workout Description: ${workout.description}</p>
+              <p>Visibility: ${workout.visibility}</p>
+              <p>Included Exercises:</p>
+          `;
+
       //Loops through exercises and display each one
       let exerciseList = document.createElement("ul");
       workout.exercises.forEach((exercise) => {
@@ -46,16 +80,27 @@ function loadWorkouts() {
         exerciseList.appendChild(exerciseItem);
       });
       newContent.appendChild(exerciseList);
-      //Creates a button element for starting a workout
+
+      //Creates the button elements
       let startButton = document.createElement("button");
       startButton.id = workout.id;
       startButton.textContent = "START WORKOUT";
-      //Attaches an event listener to the start workout button
+
+      let deleteButton = document.createElement("button");
+      deleteButton.id = workout.id;
+      deleteButton.textContent = "DELETE WORKOUT";
+
+      //Attaches an event listener to the buttons
       startButton.addEventListener("click", function () {
         ActivateWorkout(workout.id);
       });
+      deleteButton.addEventListener("click", function () {
+        DeleteWorkout(workout.id);
+      });
       //Appends the button to the new content
       newContent.appendChild(startButton);
+      newContent.appendChild(deleteButton);
+
       //Sets color based on intensity
       let intensityColor = "";
       if (workout.intensity.toLowerCase() === "low") {
@@ -73,7 +118,7 @@ function loadWorkouts() {
       workoutContainer.appendChild(newCollapsible);
       workoutContainer.appendChild(newContent);
 
-      //Adds event listener to the collapsible
+      //Adds the event listener to the collapsible
       newCollapsible.addEventListener("click", function () {
         this.classList.toggle("active");
         let content = this.nextElementSibling;
@@ -86,7 +131,7 @@ function loadWorkouts() {
     }
   }
 }
-// A function to load the dashboard page when called 
+// A function to load the dashboard page when called
 function LoadDashboard() {
   window.location = "/";
 }
